@@ -1,79 +1,146 @@
 <!DOCTYPE HTML>
+
 <html>
 	<head>
 		<title>A little book about data-driven advertising</title>
-		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<meta name="description" content="a short book about data-driven online advertising" />
 		<meta name="keywords" content="data-driven, targeting data, advertising, targeting evaluation, online advertising" />
 		<meta name="google-site-verification" content="fONLbqTsfy9ilmBJxUMD0Pcan3z1Z1CVCbtBV-6vih8" />
-		<!--[if lte IE 8]><script src="css/ie/html5shiv.js"></script><![endif]-->
-		<script src="js/skel.min.js"></script>
-		<script src="js/init.js"></script>
-		<noscript>
-			<link rel="stylesheet" href="css/skel.css" />
-			<link rel="stylesheet" href="css/style.css" />
-			<link rel="stylesheet" href="css/style-wide.css" />
-			<link rel="stylesheet" href="css/style-noscript.css" />
-		</noscript>
-		<!--[if lte IE 9]><link rel="stylesheet" href="css/ie/v9.css" /><![endif]-->
-		<!--[if lte IE 8]><link rel="stylesheet" href="css/ie/v8.css" /><![endif]-->
-
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<link rel="icon"  type="image/png" href="images/favicon.ico">
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		
 	</head>
-	<body class="loading">
-		<div id="wrapper">
-			<div id="bg"></div>
-			<div id="overlay"></div>
-			<div id="main">
+	<body>
+
+		<!-- Wrapper -->
+		<div id="particles-js">
+			<div id="wrapper">
 
 				<!-- Header -->
 					<header id="header">
-						<h1>The little book about data-driven advertising</h1>
-						<p></p>
-						<nav>
-							<ul>
-								<li><a href="book/index.html" class="icon fa-book"><span class="label">The book</span></a></li>
-								<li><a href="http://www.github.com/flovv" class="icon fa-github"><span class="label">Github</span></a></li>
-
-							</ul>
-						</nav>
+						<div class="logo">
+							<span id="topicon" class="icon fa-bullseye"></span>
+						</div>
+						<div class="content">
+							<div class="inner">
+								<h1>The little <a href="book/index.html">book</a> about data-driven advertising</h1>
+								<p>This little book details how tracking in web works, how advertisers use the tracking data to target consumers and finally analyses the question if targeting helps advertisers to improve their marketing ROI.
+									The book is written for the data-driven marketeer to show the benefits and pitfalls of the data-driven advertising.</p>
+							</div>
+						</div>
+							<div class="logo">
+								<a href="book/index.html">	<span id="topicon" class="icon fa-book"></span> </a>
+						</div>
 					</header>
 
-				<!-- Footer -->
+				<!-- Main -->
+					<div id="main">
+
+					</div>
+
+				<!-- Footer document.getElementById("bg").style.backgroundImage="url('images/bg.jpg')"  -->
 					<footer id="footer">
-						<span class="copyright">FT, 2017.</span>
+						<p class="copyright">&copy; FT, 2017. </p>
 					</footer>
-				
+
 			</div>
 		</div>
-		
-		
-	
-		<!--
-	 <canvas class="background"></canvas>  
+		<!-- BG  -->
+			<div id="bg"></div> 
 
+		 <canvas class="background"></canvas>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+			
+		
+			
 			<script>
-			window.onload = function() {
-			   Particles.init({
-				 selector: '.background',
-				 connectParticles: true,
-				 color: '#ffffff',
-				 maxParticles: 100
-			   });
-			   
-			 };
-			 </script>
-		<script src="js/particles.js"></script>
-		-->
-	</body>
+window.onload = function() {
+   Particles.init({
+     selector: '.background',
+	 connectParticles: true,
+	 color: '#ffffff',
+	 maxParticles: 100
+   });
+   
+ };
+			
+			function hipster() {
+			
+			  var vari =Math.floor((Math.random() * 5) + 1);
+			    if(vari==1) document.getElementById("topicon").className = "icon fa-diamond";
+				if(vari==2) document.getElementById("topicon").className = "icon fa-music";
+				if(vari==3) document.getElementById("topicon").className = "icon fa-heart-o";
+				if(vari==4) document.getElementById("topicon").className = "icon fa-venus-mars";
+				if(vari==5) document.getElementById("topicon").className = "icon fa-glass";
+				// fa-music
+				// fa-glass
+				// fa-heart-o
+				// fa-venus-mars 
+				//document.getElementById("bg").style.backgroundImage="url('images/bg3.jpg')";
+				//addRule("#bg:after", {background-image: url("../../images/bg.jpg")})
+			}
+			</script>
+			
+			<script>
+function changeS1(){
+document.getElementById("v1").innerHTML = document.getElementById("s1").value + " %";
+output();
+}
+function changeS2(){
+document.getElementById("v2").innerHTML = document.getElementById("s2").value + " %";
+output();
+}
+
+function output(){
+var TGSize = document.getElementById("s1").value;
+var TargetingQuality = document.getElementById("s2").value;
+
+document.getElementById("affinity").innerHTML =  Math.round(TargetingQuality / TGSize *100,2);
+
+var TKP = Number(document.getElementById("sample3").value);
+var TargetingTKP = Number(document.getElementById("sample4").value);
+
+
+var ZGTKP = Math.round( (TKP + TargetingTKP) / TargetingQuality *100, 2);
+var ZGTKP2 = Math.round(TKP / TGSize *100,2);
+document.getElementById("ZGTKP").innerHTML =  ZGTKP;
+document.getElementById("ZGTKP2").innerHTML =  ZGTKP2 ;
+
+var budget=1000;
+document.getElementById("ZGAIS").innerHTML = Math.round( budget / (TKP + TargetingTKP) *1000 * TargetingQuality /100, 0)
+document.getElementById("ZGAIS2").innerHTML = Math.round( budget / TKP *1000 * TGSize /100, 0)
+
+if(ZGTKP < ZGTKP2){
+        document.getElementById("empf").innerHTML ="Empfehlung: Targeting buchen.";
+      }
+      else{
+        document.getElementById("empf").innerHTML ="Empfehlung: Kein Targeting buchen.";
+      }
+
+}
+
+output()
+</script>
 
 <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
   m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
   })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
   ga('create', 'UA-97780546-1', 'auto');
   ga('send', 'pageview');
-
 </script>
+
+
+		<script src="assets/js/particles.js"></script>
+	</body>
 </html>
