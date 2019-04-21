@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Data-Driven Marketing’s Darkest Secret - The pitfalls of buying targeting data</title>
+  <title>Chapter 5 Modelling User Profiles | Data-Driven Marketing’s Darkest Secret - The pitfalls of buying targeting data</title>
   <meta name="description" content="This is a short guide to data-driven online advertising focusing on the German market.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Data-Driven Marketing’s Darkest Secret - The pitfalls of buying targeting data" />
+  <meta property="og:title" content="Chapter 5 Modelling User Profiles | Data-Driven Marketing’s Darkest Secret - The pitfalls of buying targeting data />
   <meta property="og:type" content="book" />
   
   
@@ -17,7 +17,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Data-Driven Marketing’s Darkest Secret - The pitfalls of buying targeting data" />
+  <meta name="twitter:title" content="Chapter 5 Modelling User Profiles | Data-Driven Marketing’s Darkest Secret - The pitfalls of buying targeting data />
   
   <meta name="twitter:description" content="This is a short guide to data-driven online advertising focusing on the German market." />
   
@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-
-<link rel="next" href="introduction.html">
+<link rel="prev" href="owning-a-data-management-platform.html">
+<link rel="next" href="buying-targeting-data.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -137,23 +137,58 @@
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="header">
-<h1 class="title">Data-Driven Marketing’s Darkest Secret - The pitfalls of buying targeting data</h1>
-<p class="author"><em>Florian Teschner</em></p>
-<p class="date"><em>2019-04-21</em></p>
+<div id="modelling-user-profiles" class="section level1">
+<h1><span class="header-section-number">Chapter 5</span> Modelling User Profiles</h1>
+<p>The whole thing starts with massive, passive data collection. No matter which website we visit or which app we use: We leave a digital footprint. These footprints are compiled for individual users and form so-called user profiles. A set of similar profiles is then aggregated to user segments, which aim at describing a homogeneous set of users with similar preferences and interests.</p>
+<div id="what-is-look-a-like-modelling" class="section level2">
+<h2><span class="header-section-number">5.1</span> What is look-a-like modelling?</h2>
+<p>Lookalike modelling is “finding new people who behave like current customers – or like a defined segment. The topic is hot, but there’s deliberate mystery about the method and its accuracy” <a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> The following section, will demystify the method and bring some science to it.</p>
+<p>The basic idea is to find users who belong to a defined audience. Starting from a seed audience such as users who already converted or users that have state to belong to an audience through an survey, the idea is to train a statistical model to identify which user actions separate that user cluster from other users. Let’s have a look at a simple example to predict a user’s gender. The data usually used to create the lookalike models consists of the websites a user has visited in the past and one outcome variable. In this example that outcome variable is the user’s gender.</p>
+<div class="figure">
+<img src="gitbook/images/lookalike1.png" alt="Schematic view of the look-a-like prediction process" />
+<p class="caption">Schematic view of the look-a-like prediction process</p>
 </div>
-<div id="motivation-and-structure" class="section level1">
-<h1><span class="header-section-number">Chapter 1</span> Motivation and Structure</h1>
-<p>We live in a connected world. No matter which website we visit, which app we use and which people we interact with: We leave a digital footprint.<br />
-Day by day, there is more behavioral data created and it often makes using the internet more comfortable. Here is an example: Netflix concludes from user data which movies we like and subsequently optimizes which videos are suggested to us individually. Google individualizes search results and advertisers measure the effect of ad impressions on purchase probability. Tracking data helps companies to better understand consumer behavior and to customize their services. Moreover, it allows them to better target potential customers.</p>
-<p>This little booklet <a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> tries to detail how tracking in web currently works, how advertisers use the tracking data to target consumers and finally analyses the question if targeting helps advertisers to improve their marketing ROI. The book is written for the data-driven marketeer, to show the benefits and drawbacks of the current practice.</p>
-<p>The book is organized as follows; first it details the basic mechanism of real-time advertising, followed by a more detailed view on how online targeting data is gathered. It tries to show that targeting data is rather crude in most cases and data providers have limited incentives to increase data quality. Taking the view of a marketeer, it analyses the effect of targeting on marketing ROI. Finally, it questions the current (mis-)use of tracking data in order to achieve higher sales and better ROI. Each section closes with a couple of questions marketeers might consider.</p>
+<p>That information is fed into various algorithms to train models on the data. One such model can be a tree-based model. The following chart exemplifies such a “Tree” model. As basis we used 20000 users and just 4 websites to classify users depending on their gender. The websites are illustrated as boxes in the middle. In the first step the model tells us that if a user visited chip.de (N&gt;=1) he is with a probability of 65% male. As a more complex example down the tree is if a user did not visit chip.de but gesuende.de she is with 73% female. That tree gets more complex if users can be segmented using more websites.</p>
+<div class="figure">
+<img src="gitbook/images/lookalike2.png" alt="Example tree-algorithm to decide on user attribute" />
+<p class="caption">Example tree-algorithm to decide on user attribute</p>
+</div>
+<p>Next, we discuss several factors that influence how well lookalike modelling approaches work.</p>
+</div>
+<div id="factors-influencing-modelling-accuracy" class="section level2">
+<h2><span class="header-section-number">5.2</span> Factors influencing modelling accuracy</h2>
+<p>Model accuracy describes how well the model classifies users. As a simple measure, we take the prediction accuracy defined as the number of correctly classified users as a percentage of all classified users. For the previous example of predicting a user’s gender we see that the accuracy is a function of how many websites are used. In the example chart 62% of all users are correctly classified by just using 20 randomly selected websites as data source. That number increases to roughly 73% when the model has access to 500+ websites. After that, additional websites do not add predictive value.</p>
+<div class="figure">
+<img src="gitbook/images/lookalike3.png" alt="Prediction accuracy is dependent on website universe" />
+<p class="caption">Prediction accuracy is dependent on website universe</p>
+</div>
+<p>This means that data providers theoretical prediction quality depends on number of websites their tracking code is implemented on. Small scale data providers with a small “tracking universe” will very likely have a hard time to use lookalike modelling approaches or conversely their prediction accuracy will be subpar.</p>
+<p>Another important aspect is the so-call prediction threshold. Machine learning algorithms usually output a probability that a user for each user classification. For example, the predicting a user’s gender might result in a prediction 80% male, 20% female. In a second step, the system applies a threshold to label the user. For users where the output is uncertain e.g. 50% male/female it depends on the system setting if this user’s gender is labeled “unknown”. The threshold setting introduces a moral challenge for the data provider. Increasing the threshold increases the prediction accuracy. Only users are classified for which the algorithm is certain that the prediction is correct. However, setting the threshold higher, reduces the number of users classified. Hence, the scale which the data provider aims to sell.</p>
+<p>The following chart exemplifies the relationship.</p>
+<div class="figure">
+<img src="gitbook/images/lookalike4.png" alt="Prediction accuracy is dependent on the share of users classified" />
+<p class="caption">Prediction accuracy is dependent on the share of users classified</p>
+</div>
+<p>In the dataset studied, we see that if we aim for a prediction accuracy of 80% for gender, we can only classify 20% of all users. This relationship depends on the data provider’s scale (see previous point) as well as the classification (gender is different than age brackets).</p>
+<p>In general, a models prediction accuracy depends on the classification type. There are two simple reasons for that; a) an algorithmic and b) an informational reason. For the algorithmic reason, some classification types are harder than others. The gender classification is binary (e.g. coin flip). Hence the base rate is 50%. If the algorithm should predict age brackets there are multiple options to pick (20-30 vs 30-40 vs 40-50, …). The base-rate is consequential lower which means that an algorithm predicting at random will have a worse prediction accuracy in the case of the age prediction. The informational aspect touches the fundamentals of lookalike modelling; there needs to be information in the features used. Users which belong to different classes need to have distinctively different website usage. If users belong to different classes but have the same behavior the model cannot successfully differentiate between them. The prediction accuracy will suffer. To stick with the age bracket example; users age 39 have a very similar website usage behavior compared to users age 41.</p>
+<p>One point that is often mentioned by data providers is their superior machine learning / artificial intelligence / deep learning algorithm. While there might be cases (natural language processing or computer vision) where advanced AI have an edge, in most lookalike scenarios this is not the case. The data described in the last paragraphs is pretty clean and can be easily handled by off the shelf algorithms (e.g. XGBoost, random forest).</p>
+<p>The AI label is often used in “sales” pitches to deflect from the really important questions; scale of tracking, threshold to predict and accuracy of different classification types.</p>
+<p>Questions that advertisers should ask providers of lookalike models:</p>
+<ul>
+<li>How accurate are Lookalike models? What are the key factors?</li>
+<li>What is the effect of the number of websites used to measure user behavior?</li>
+<li>What is the effect of different Machine Learning algorithms?</li>
+<li>What is the effect the selection of websites used to measure user behavior?</li>
+<li>What is the minimum number of users needed to create models?</li>
+<li>Which attributes can reliably been used to create models?</li>
+</ul>
 
+</div>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="1">
-<li id="fn1"><p>A short note on the book title: The book itself is a small experiment on the Amazon marketplace. In digital content distribution it is commonplace to optimize headlines. This practice seems not to have taken hold in the book title generation so far. I used a simple web-service to test various multiple titles to increase “clicks”. As a result I got this catchy and click-bait title.<a href="index.html#fnref1">↩</a></p></li>
+<ol start="2">
+<li id="fn2"><p><a href="https://www.theguardian.com/media-network/media-network-blog/2013/sep/06/lookalike-modelling-advertising-demystified" class="uri">https://www.theguardian.com/media-network/media-network-blog/2013/sep/06/lookalike-modelling-advertising-demystified</a><a href="modelling-user-profiles.html#fnref2">↩</a></p></li>
 </ol>
 </div>
             </section>
@@ -161,8 +196,8 @@ Day by day, there is more behavioral data created and it often makes using the i
           </div>
         </div>
       </div>
-
-<a href="introduction.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="owning-a-data-management-platform.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="buying-targeting-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
